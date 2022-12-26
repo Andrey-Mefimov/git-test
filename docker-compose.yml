@@ -19,6 +19,6 @@ services:
       MYSQL_USER: 'admin'
       MYSQL_PASSWORD: 'admin'
       MYSQL_ROOT_PASSWORD: 'admin'
-    restart: on-failure
-    volumes:
-      - ./db_django:/var/lib/mysql
+#    restart: on-failure
+#    volumes:
+#      - ./db_django:/var/lib/mysql
