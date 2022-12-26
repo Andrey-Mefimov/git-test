@@ -1,7 +1,28 @@
+node {
+
+        
+    stage('Build image') {
+       dockerImage = docker.build("nezimov/prakt4:latest")
+    }
+    
+    stage('Pushing Image'){
+        environment{
+            registryCredential = 'DOCKERHUB_LOGIN'
+        }
+        steps{
+            script{
+                docker.withRegistry( 'http://registry.hub.docker.com', registryCredential ){
+                    dockerImage.push("latest")
+                }
+            }
+        }
+    }
+}
+
 pipeline {
 
   environment {
-    dockerimagename = "thetips4you/nodeapp"
+    dockerimagename = "nezimov/prakt4"
     dockerImage = ""
   }
 
@@ -9,19 +30,16 @@ pipeline {
 
   stages {
 
-    stage('Checkout Source') {
-      steps {
-        git 'https://github.com/shazforiot/nodeapp_test.git'
-      }
-    }
-
-    stage('Build image') {
-      steps{
-        script {
-          dockerImage = docker.build dockerimagename
+    stage('Git Clone'){
+    	git branch: 'main', credentialsId: 'GIT_HUB_CREDENTIALS', url: 'https://github.com/Andrey-Mefimov/git-test'
         }
-      }
-    }
+
+    stage('Build Docker Image') {  
+    steps{                     
+    sh 'docker-compose build'     
+    echo 'Docker-compose-build Build Image Completed'                
+    }           
+}
 
     stage('Pushing Image') {
       environment {
