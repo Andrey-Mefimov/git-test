@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/src/styles/style.css">
+    <title>Регистрация</title>
+</head>
+<body>
+    <form action="#" method="post" enctype="multipart/form-data"></form>
+    <div class="reg">
+        <div class="container">
+            <div class="form">
+                <h1>Регистрация</h1>
+                <form class="form" method="post">
+            	{% csrf_token %}
+                <ul class="form__list">
+                    <li class="form__item">{{ form.first_name }}</li>
+                    <li class="form__item">{{ form.second_name }}</li>
+                    <li class="form__item">{{ form.phonenumber }}</li>
+                    <li class="form__item">{{ form.email }}</li>
+                </ul>
+                    <button class="button" type="sumbit">Зарегистрироваться</button>
+                <div class="mass">
+                    <span>{{ error }}</span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
